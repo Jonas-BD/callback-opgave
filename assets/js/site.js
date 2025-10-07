@@ -36,6 +36,7 @@ function initApp() {
         currentData = storeddata;
     }
     setupStatics();
+    listView();
 }
 
 
@@ -43,8 +44,7 @@ function initApp() {
 function setupStatics() {
 console.log('setupStatics called');
     const newButton = document.getElementById('newListButton');
-    newListButton.addEventListener('click', newCallback);
-      listView();
+    newButton.addEventListener('click', newCallback);
 }
 
  // #endregion
@@ -54,8 +54,39 @@ console.log('setupStatics called');
 //- Callbacks with switch to handle different functions and appState
 //---------------------------------------------------------------------------------------------------------------------
 
+function listClickCallback(action,index) {
+    activeList = index
+    switch (action) {
+        case 'showList':
+            console.log('Vis liste '+index)
+            listItemView()
+            break;
+        case 'editList':
+            console.log('Edit liste '+index)
+            break;
+        case 'deleteList':
+            console.log('Delete liste '+index)
+            break;
+        default:
+            console.error('This is not defined...')
+            break;
+    }
+}
+
 // Callback for creating a new list (model code) with switch and appState
-function newCallback(){}
+function newCallback(){
+    switch (appState) {
+        case 'listView':
+            console.log('List new');
+            break;
+        case 'itemView':
+            console.log('Item view');
+            break;
+        default:
+            console.error('This is not defined...');
+            break;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------
